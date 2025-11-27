@@ -1,0 +1,79 @@
+*,
+::after,
+::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    list-style-type: none;
+}
+
+:root {
+    --color1: #FFF8E7;  /* Fond de page */
+    --color2: #F9A826;  /* Dos des cartes / jaune chantier */
+    --color3: #F06A6A;  /* Bordures cartes / rouge clair */
+    --color4: #333333;  /* Texte / titres */
+    --color5: #FFDD57;  /* Survol des cartes */
+    --color6: #A3D5FF;  /* Carte révélée / fond bleu ciel */
+    --color7: #4CAF50;  /* Score / compteur */
+    --color8: #FFD700;  /* Effet glow / succès d’une paire */
+    --color9: #FDF5E6;  /*Body*/
+    --color10:#f1e5cd ; /*Body*/
+}  
+
+body {
+    background-color: var(--color9);
+    background-image: linear-gradient(45deg,var(--color9)25%, var(--color10) 25%, var(--color10) 50%, var(--color9)50%, var(--color9) 75%,var(--color10) 75%, var(--color10)100%);
+    background-size: 40px 40px;
+}
+
+/* header */
+
+h1{
+    color: var(--color4);
+    padding: 20px;
+}
+
+
+p{
+    color: var(--color4);
+     padding: 10px 20px;
+}
+/* end header */
+
+
+
+main{
+    display: flex;
+    align-items: stretch;
+    justify-content: center
+
+}
+
+
+/* card grid */
+.cards{
+    height: 80vh;
+    width: 80vh; 
+    border: 8px solid var(--color5);
+    border-radius: 20px;
+}
+
+/* end card grid  */
+
+
+
+
+/* grid ASIDE */
+.sectionAside{
+    width:20vh;
+}
+/* en dgrid ASIDE */
+.actions{
+    padding: 10px;
+}
+
+.end{
+    padding: 0 20px;
+}
