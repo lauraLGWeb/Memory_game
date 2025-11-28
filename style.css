@@ -54,8 +54,8 @@ main{
 
 /* card grid */
 .cards{
-    height: 80vw;
-    width: 80vw; 
+    height: 550px;
+    width: 550px; 
     margin: auto;
     border: 10px solid var(--color5);
     border-radius: 20px;
@@ -64,10 +64,7 @@ main{
     grid-template-columns: repeat(4, 24%);
     grid-template-rows: repeat(4,24%);
     padding: 5px;
-}
-
-.Eachcard{
-position: relative;
+    position: relative;
 }
 
 .frontImage{
