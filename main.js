@@ -57,6 +57,7 @@ function shuffle() {
 function createCard() {
 cardsArray.forEach(function(card){
     
+    
 
 //create the div for both 
     let bothCards = document.createElement("div");
@@ -78,7 +79,8 @@ cardsArray.forEach(function(card){
 
     bothCards.appendChild(newCard);  
     bothCards.appendChild(newCardBack);  
-    cardsFrame.appendChild(bothCards);  
+    cardsFrame.appendChild(bothCards); 
+    
     })
 }
 
@@ -120,12 +122,29 @@ cardsArray.forEach(function(card){
 });
 
 
+
 /* ============================
    INITIALIZATION
    ============================ */
 //---------------create the cards from the array 
   createCard();
-
 //----------------
 
-//flip card à faire
+
+cards = document.querySelectorAll(".both")
+cards.forEach(function(card){
+    let flip = false;
+        card.addEventListener("click", function(){
+                //flip card
+                let name = card.querySelector(".frontImage")
+                srcImg = name.src
+                console.log(srcImg);
+                card.classList.add ("flip"); 
+                flip=true;
+                console.log(nbClick);
+                      
+            })
+       
+
+    
+})
