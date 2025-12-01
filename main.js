@@ -21,7 +21,7 @@
    GLOBAL VARIABLES
    ============================ */
 
-
+let flipCards = []
 const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
 
 const restartBtn = document.querySelector(".Rtg");
@@ -134,17 +134,45 @@ cardsArray.forEach(function(card){
 cards = document.querySelectorAll(".both")
 cards.forEach(function(card){
     let flip = false;
+
+
         card.addEventListener("click", function(){
+        // retourn card if not two returned
+           
+            if (flipCards.length < 2)  {
                 //flip card
                 let name = card.querySelector(".frontImage")
                 srcImg = name.src
-                console.log(srcImg);
+                // return the card 
                 card.classList.add ("flip"); 
-                flip=true;
-                console.log(nbClick);
-                      
-            })
-       
+                flipCards.push(card);
 
-    
-})
+                // comparaison if two cards returned
+                if (flipCards.length === 2){
+                    
+                    if(flipCards[0].querySelector(".frontImage").src === flipCards[1].querySelector(".frontImage").src){
+
+
+                    } else if(flipCards[0].querySelector(".frontImage").src !== flipCards[1].querySelector(".frontImage").src){
+
+                        // if cards not identicals, flipping back after few secs 
+                        setTimeout(function(){
+                        flipCards[0].classList.remove("flip");
+                        flipCards[1].classList.remove("flip");
+                        flipCards = [];
+                        },1500); 
+
+
+                        
+
+                        }
+                    
+                    }  
+            
+        }
+
+    })
+
+});
+       
+        
