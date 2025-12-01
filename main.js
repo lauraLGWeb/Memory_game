@@ -14,165 +14,170 @@
 - au clic sur une image ca prends sa valeur et sa la retourne 
 */
 
-
-
-
 /* ============================
    GLOBAL VARIABLES
    ============================ */
 
-let flipCards = []
+let flipCards = [];
+// found cards 
+let flip = 0;
+
+
 const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
 
 const restartBtn = document.querySelector(".Rtg");
 
 const eachCard = document.querySelectorAll(".EachCard");
 
-// array of pictures 
-const cardsArray = ["assets/bulldozer.png", "assets/cementmixer.png","assets/crane.png","assets/dumptruck.png","assets/excavator.png","assets/frontlader.png","assets/grader.png","assets/roadroller.png","assets/bulldozer.png", "assets/cementmixer.png","assets/crane.png","assets/dumptruck.png","assets/excavator.png","assets/frontlader.png","assets/grader.png","assets/roadroller.png"];
-
-
-
-
+// array of pictures
+const cardsArray = [
+    "assets/bulldozer.png",
+    "assets/cementmixer.png",
+    "assets/crane.png",
+    "assets/dumptruck.png",
+    "assets/excavator.png",
+    "assets/frontlader.png",
+    "assets/grader.png",
+    "assets/roadroller.png",
+    "assets/bulldozer.png",
+    "assets/cementmixer.png",
+    "assets/crane.png",
+    "assets/dumptruck.png",
+    "assets/excavator.png",
+    "assets/frontlader.png",
+    "assets/grader.png",
+    "assets/roadroller.png",
+];
 
 /* ============================
    DOM ELEMENTS
    ============================ */
 
-
-
-
-
 /* ============================
    MAIN FUNCTIONS
    ============================ */
 
-//shuffle the array 
+//shuffle the array
 function shuffle() {
-  cardsArray.sort((a, b) => 0.5 - Math.random());
+    cardsArray.sort((a, b) => 0.5 - Math.random());
 }
-
-
 
 function createCard() {
-cardsArray.forEach(function(card){
-    
-    
+    cardsArray.forEach(function (card) {
+        //create the div for both
+        let bothCards = document.createElement("div");
+        bothCards.className = "both";
 
-//create the div for both 
-    let bothCards = document.createElement("div");
-    bothCards.className = "both";
+        //create the card with the picture
+        let newCard = document.createElement("img");
+        newCard.src = card;
+        newCard.alt = "Une image";
+        newCard.className = "frontImage";
 
+        //create the back of the card
+        let newCardBack = document.createElement("div");
+        newCardBack.className = "backImage";
 
-//create the card with the picture 
-    let newCard = document.createElement("img");
-    newCard.src = card;
-    newCard.alt = "Une image";
-    newCard.className = "frontImage";
+        // add them to the dom
 
-
-     //create the back of the card
-    let newCardBack = document.createElement("div");
-    newCardBack.className = "backImage";
-    
-     // add them to the dom 
-
-    bothCards.appendChild(newCard);  
-    bothCards.appendChild(newCardBack);  
-    cardsFrame.appendChild(bothCards); 
-    
-    })
+        bothCards.appendChild(newCard);
+        bothCards.appendChild(newCardBack);
+        cardsFrame.appendChild(bothCards);
+    });
 }
 
+function play(){
+    
+cards = document.querySelectorAll(".both");
+cards.forEach(function (card) {
+   
+
+    card.addEventListener("click", function () {
+        // retourn card if not two returned
+
+        if (flipCards.length < 2) {
+            //flip card
+            let name = card.querySelector(".frontImage");
+            srcImg = name.src;
+            // return the card
+            card.classList.add("flip");
+            flipCards.push(card);
+
+            // comparaison if two cards returned
+            if (flipCards.length === 2) {
+                if (
+                    flipCards[0].querySelector(".frontImage").src ===
+                    flipCards[1].querySelector(".frontImage").src
+                ) {
+                    flipCards = [];
+                    flip += 2;
+                    if (flip === 16){
+                        alert("you won");
+                        
+                    } else {
+                        console.log("keep going");
+                        console.log(flip);
+                        
+                        
+                    }
+
+                } else if (
+                    flipCards[0].querySelector(".frontImage").src !==
+                    flipCards[1].querySelector(".frontImage").src
+                ) {
+                    // if cards not identicals, flipping back after few secs
+                    setTimeout(function () {
+                        flipCards[0].classList.remove("flip");
+                        flipCards[1].classList.remove("flip");
+                        flipCards = [];
+                    }, 1000);
+                }
+            }
+        }
+    });
+});
+
+
+}
 /* ============================
    EVENT LISTENERS
    ============================ */
 
 // restart button
-   restartBtn.addEventListener("click", function(){
+restartBtn.addEventListener("click", function () {
     const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
+    flipCards = [];
+    flip = 0;
     shuffle();
-    cardsFrame.innerHTML ="";
-    cardsArray.forEach(function(card){
-    
+    cardsFrame.innerHTML = "";
+    cardsArray.forEach(function (card) {
+        //create the div for both
+        let bothCards = document.createElement("div");
+        bothCards.className = "both";
 
-    //create the div for both 
-    let bothCards = document.createElement("div");
-    bothCards.className = "both";
+        //create the card with the picture
+        let newCard = document.createElement("img");
+        newCard.src = card;
+        newCard.alt = "Une image";
+        newCard.className = "frontImage";
 
+        //create the back of the card
+        let newCardBack = document.createElement("div");
+        newCardBack.className = "backImage";
 
-    //create the card with the picture 
-    let newCard = document.createElement("img");
-    newCard.src = card;
-    newCard.alt = "Une image";
-    newCard.className = "frontImage";
+        // add them to the dom
 
-
-     //create the back of the card
-    let newCardBack = document.createElement("div");
-    newCardBack.className = "backImage";
-    
-     // add them to the dom 
-
-    bothCards.appendChild(newCard);  
-    bothCards.appendChild(newCardBack);  
-    cardsFrame.appendChild(bothCards);  
-    })
-
+        bothCards.appendChild(newCard);
+        bothCards.appendChild(newCardBack);
+        cardsFrame.appendChild(bothCards);
+    });
+    play();
 });
-
-
 
 /* ============================
    INITIALIZATION
    ============================ */
-//---------------create the cards from the array 
-  createCard();
+//---------------create the cards from the array
+createCard();
+play();
 //----------------
-
-
-cards = document.querySelectorAll(".both")
-cards.forEach(function(card){
-    let flip = false;
-
-
-        card.addEventListener("click", function(){
-        // retourn card if not two returned
-           
-            if (flipCards.length < 2)  {
-                //flip card
-                let name = card.querySelector(".frontImage")
-                srcImg = name.src
-                // return the card 
-                card.classList.add ("flip"); 
-                flipCards.push(card);
-
-                // comparaison if two cards returned
-                if (flipCards.length === 2){
-                    
-                    if(flipCards[0].querySelector(".frontImage").src === flipCards[1].querySelector(".frontImage").src){
-
-
-                    } else if(flipCards[0].querySelector(".frontImage").src !== flipCards[1].querySelector(".frontImage").src){
-
-                        // if cards not identicals, flipping back after few secs 
-                        setTimeout(function(){
-                        flipCards[0].classList.remove("flip");
-                        flipCards[1].classList.remove("flip");
-                        flipCards = [];
-                        },1500); 
-
-
-                        
-
-                        }
-                    
-                    }  
-            
-        }
-
-    })
-
-});
-       
-        
