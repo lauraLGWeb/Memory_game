@@ -23,6 +23,7 @@ let flipCards = [];
 let flip = 0;
 
 
+
 const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
 
 const restartBtn = document.querySelector(".Rtg");
@@ -139,6 +140,7 @@ cards.forEach(function (card) {
 
 
 }
+ 
 /* ============================
    EVENT LISTENERS
    ============================ */
@@ -180,4 +182,23 @@ restartBtn.addEventListener("click", function () {
 //---------------create the cards from the array
 createCard();
 play();
+//----------------
+
+
+
+//---------------set up the timer
+const timer = document.querySelector(".timer");
+let temps = 0;
+
+// give the timer for seconds and minuts
+function addTime(){
+let minutes = parseInt(temps / 60, 10);
+let secondes = parseInt(temps % 60, 10);
+
+timer.innerHTML = minutes + ":" + secondes;
+temps++
+}
+
+// add 1 everyeach second to the time
+setInterval(addTime, 1000);
 //----------------
