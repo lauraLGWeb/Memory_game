@@ -18,11 +18,18 @@
    GLOBAL VARIABLES
    ============================ */
 
+//timer 
+const timer = document.querySelector(".timer");
+let temps = 0;
+let minutesStr = "";
+let secondesStr ="";
+let timerStarted = false;   
+let secondsCount = ""
+
+
 let flipCards = [];
 // found cards 
 let flip = 0;
-
-
 
 const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
 
@@ -59,6 +66,31 @@ const cardsArray = [
    ============================ */
 
 //shuffle the array
+
+
+//---------------set up the timer
+
+
+// give the timer for seconds and minuts
+function addTime(){
+let minutes = parseInt(temps / 60,10);
+let secondes = parseInt(temps % 60, 10);
+
+// Formater pour toujours avoir deux chiffres
+ minutesStr = String(minutes).padStart(2, '0');
+ secondesStr = String(secondes).padStart(2, '0');
+
+timer.innerHTML = minutesStr + ":" + secondesStr;
+temps++
+}
+
+function startTimer(){
+     if (!timerStarted){
+              secondsCount = setInterval(addTime, 1000);
+            timerStarted = true;  
+        }
+}
+
 function shuffle() {
     cardsArray.sort((a, b) => 0.5 - Math.random());
 }
@@ -87,15 +119,34 @@ function createCard() {
     });
 }
 
-function play(){
+
+function restart() {
+
+    const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
+    flipCards = [];
+    flip = 0;
+    temps = 0;
+    clearInterval(secondsCount);
+    timerStarted = false;
     
+    shuffle();
+    cardsFrame.innerHTML = "";
+    createCard();
+    play();
+
+}
+
+
+function play(){
 cards = document.querySelectorAll(".both");
 cards.forEach(function (card) {
    
 
     card.addEventListener("click", function () {
-        // retourn card if not two returned
 
+       startTimer();
+
+        // return card if not two returned
         if (flipCards.length < 2) {
             //flip card
             let name = card.querySelector(".frontImage");
@@ -112,14 +163,14 @@ cards.forEach(function (card) {
                 ) {
                     flipCards = [];
                     flip += 2;
-                    if (flip === 16){
-                        alert("you won");
+
+                    // if all the card are returned, win message with new game
+                    if (flip === 16){   
+                        wonMessage();
+                                               
                         
                     } else {
-                        console.log("keep going");
-                        console.log(flip);
-                        
-                        
+                        console.log(flip);  
                     }
 
                 } else if (
@@ -141,40 +192,70 @@ cards.forEach(function (card) {
 
 }
  
+
+function wonMessage(){
+
+let popUpMsgSection = document.querySelector(".popUpMsg");
+
+//div creation
+let divWonMessage = document.createElement("div");
+divWonMessage.classList.add("divMsg");
+
+//message creation
+let wonMessageP = document.createElement("p");
+wonMessageP.innerHTML = "You are a winner!!<br> Only "  + minutesStr + " : " + secondesStr;
+wonMessageP.classList.add("winMsg");
+//Close button creation
+let closeBtn = document.createElement("button");
+closeBtn.classList.add("closeBtn");
+closeBtn.innerHTML = "Close";
+
+//restart button creation
+let restartBtn = document.createElement("button");
+restartBtn.classList.add("restartBtn");
+restartBtn.innerHTML = "Restart";
+
+ // add them to the dom
+popUpMsgSection.appendChild(divWonMessage);
+divWonMessage.appendChild(wonMessageP);
+divWonMessage.appendChild(closeBtn);
+divWonMessage.appendChild(restartBtn);
+
+
+clearInterval(secondsCount);
+temps = 0;
+timerStarted = false;
+
+
+//closing and restart buttons
+closeBtn.addEventListener("click", function(){
+    divWonMessage.remove()
+    
+})
+
+restartBtn.addEventListener("click", function(){
+    restart()
+    divWonMessage.remove();
+   
+})
+
+};
+
+
+
+
+
+
+
 /* ============================
    EVENT LISTENERS
    ============================ */
 
 // restart button
-restartBtn.addEventListener("click", function () {
-    const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
-    flipCards = [];
-    flip = 0;
-    shuffle();
-    cardsFrame.innerHTML = "";
-    cardsArray.forEach(function (card) {
-        //create the div for both
-        let bothCards = document.createElement("div");
-        bothCards.className = "both";
-
-        //create the card with the picture
-        let newCard = document.createElement("img");
-        newCard.src = card;
-        newCard.alt = "Une image";
-        newCard.className = "frontImage";
-
-        //create the back of the card
-        let newCardBack = document.createElement("div");
-        newCardBack.className = "backImage";
-
-        // add them to the dom
-
-        bothCards.appendChild(newCard);
-        bothCards.appendChild(newCardBack);
-        cardsFrame.appendChild(bothCards);
-    });
-    play();
+restartBtn.addEventListener("click", function() {
+    restart();
 });
+
 
 /* ============================
    INITIALIZATION
@@ -185,20 +266,4 @@ play();
 //----------------
 
 
-
-//---------------set up the timer
-const timer = document.querySelector(".timer");
-let temps = 0;
-
-// give the timer for seconds and minuts
-function addTime(){
-let minutes = parseInt(temps / 60, 10);
-let secondes = parseInt(temps % 60, 10);
-
-timer.innerHTML = minutes + ":" + secondes;
-temps++
-}
-
-// add 1 everyeach second to the time
-setInterval(addTime, 1000);
 //----------------
