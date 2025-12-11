@@ -199,7 +199,7 @@ transition: 1s;
 .popUpMsg{
     position: absolute;
     top: 30%;
-    max-width: 50vw;
+    width: 50vw;
     margin: auto; 
 }
 
@@ -249,26 +249,7 @@ transition: 1s;
     cursor: pointer;
 }
 
-@media all and (max-width: 800px){
-    main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
-    .actions{
-        width: 60vw;
-        text-align: center;
-        display: flex;
-        align-items: center;
-    }
 
-    .cards{
-    height: 95vw;
-    width: 95vw; 
-   
-    }
-  
-}
 
 /* end card grid  */
 
@@ -305,4 +286,79 @@ footer .end {
     font-weight: 600;
     font-size: 0.6rem;
     letter-spacing: 2px;
+}
+
+
+
+@media all and (max-width: 800px){
+    main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .actions{
+        width: 60vw;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .cards{
+    height: 95vw;
+    width: 95vw; 
+   
+    }
+  
+}
+
+
+@media all and (max-width: 840px){
+    main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .actions{
+        width: 60vw;
+        text-align: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .cards{
+    height: 95vw;
+    width: 95vw; 
+   
+    }
+    .sectionAside{
+        margin-bottom:20px;
+        height: 25%;
+        width:90%;
+        flex-direction: row;
+    }
+    .divMsg{
+            width:100%;
+        }
+
+    .popUpMsg{
+        width: 80vw;
+    }
+    
+
+    footer{
+        margin:0;
+    }
+}
+
+@media all and (max-width: 500px){
+
+    .sectionAside{
+        margin-bottom:20px;
+        height: 25%;
+        max-width:60%;
+        flex-direction: column;
+    }
+
+   
+
 }
