@@ -142,8 +142,8 @@ main{
 
 /* card grid */
 .cards{
-    height: 550px;
-    width: 550px; 
+    height: 450px;
+    width: 450px; 
     margin: auto;
     border: 7px solid var(--color3);
     border-radius: 20px;
@@ -198,7 +198,7 @@ transition: 1s;
 /* popup message */
 .popUpMsg{
     position: absolute;
-    top: 30%;
+    top: 20%;
     width: 50vw;
     margin: auto; 
 }
@@ -216,7 +216,7 @@ transition: 1s;
     color: var(--color3); 
     text-transform: uppercase;
     letter-spacing: 1px;
-     border: 4px solid var(--color3); 
+    border: 4px solid var(--color3); 
     border-radius: 15px;
     box-shadow: 6px 6px 0 var(--color3); 
     text-align: center;
@@ -302,12 +302,7 @@ footer .end {
         display: flex;
         align-items: center;
     }
-
-    .cards{
-    height: 95vw;
-    width: 95vw; 
-   
-    }
+  
   
 }
 
@@ -324,12 +319,6 @@ footer .end {
         display: flex;
         align-items: center;
     }
-
-    .cards{
-    height: 95vw;
-    width: 95vw; 
-   
-    }
     .sectionAside{
         margin-bottom:20px;
         height: 25%;
@@ -343,7 +332,11 @@ footer .end {
     .popUpMsg{
         width: 80vw;
     }
-    
+     .cards{
+    max-height: 60vh;
+    max-width: 60vh; 
+    }
+  
 
     footer{
         margin:0;
@@ -359,6 +352,10 @@ footer .end {
         flex-direction: column;
     }
 
-   
+    .cards{
+    max-height: 50vh;
+    max-width: 50vh; 
+    }
+  
 
 }

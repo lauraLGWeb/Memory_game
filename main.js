@@ -33,7 +33,7 @@ let flip = 0;
 
 const cardsFrame = document.querySelector(".cards"); // yellow frame wich contains all the cards = parent
 
-const restartBtn = document.querySelector(".Rtg");
+const shuffleBtn = document.querySelector(".Rtg");
 
 const eachCard = document.querySelectorAll(".EachCard");
 
@@ -167,6 +167,9 @@ cards.forEach(function (card) {
                     // if all the card are returned, win message with new game
                     if (flip === 16){   
                         wonMessage();
+                        //desactivate shuffle the game 
+                       
+
                                                
                         
                     } else {
@@ -226,25 +229,24 @@ clearInterval(secondsCount);
 temps = 0;
 timerStarted = false;
 
+shuffleBtn.removeEventListener("click", restart);
+
 
 //closing and restart buttons
 closeBtn.addEventListener("click", function(){
     divWonMessage.remove()
+    shuffleBtn.addEventListener("click", restart);
     
 })
 
 restartBtn.addEventListener("click", function(){
     restart()
     divWonMessage.remove();
+    shuffleBtn.addEventListener("click", restart);
    
 })
 
 };
-
-
-
-
-
 
 
 /* ============================
@@ -252,9 +254,7 @@ restartBtn.addEventListener("click", function(){
    ============================ */
 
 // restart button
-restartBtn.addEventListener("click", function() {
-    restart();
-});
+shuffleBtn.addEventListener("click", restart);
 
 
 /* ============================
