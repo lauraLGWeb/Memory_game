@@ -4,7 +4,7 @@ A fun and colorful memory game for kids! Match pairs of construction vehicles in
 
 ## Demo
 
-https://lauralgweb.github.io/Memory_game/
+finishedmemorygame.netlify.app
 
 ## Features
 
